@@ -82,9 +82,12 @@ class AutoRec():
 
             # Save the variables to disk.
             save_path = self.saver.save(
-                self.sess, self.session_log_path + "models/epoch{}".format(self.timestamp, epoch_itr))
+                self.sess, self.session_log_path + "models/epoch{}".format(epoch_itr))
             self.logger.log(
                 "===== Model saved in path: {} =====\n".format(save_path))
+            print(
+                "===== Model saved in path: {} =====\n".format(save_path))
+            
 
         self.make_records()
 
@@ -162,6 +165,12 @@ class AutoRec():
                 "Epoch {} \t Total cost = {:.2f}\n"
                 "Elapsed time : {} sec\n".format(
                     itr, batch_cost, (time.time() - start_time)))
+            
+            print(
+                "===== Training =====\n"
+                "Epoch {} \t Total cost = {:.2f}\n"
+                "Elapsed time : {} sec\n".format(
+                    itr, batch_cost, (time.time() - start_time)))
 
     def test_model(self, itr):
         start_time = time.time()
@@ -215,6 +224,12 @@ class AutoRec():
             self.test_rmse_list.append(RMSE)
 
             self.logger.log(
+                "===== Testing =====\n"
+                "Epoch {} \t Total cost = {:.2f}\n"
+                "RMSE = {:.5f} \t Elapsed time : {} sec\n".format(
+                    itr, batch_cost, RMSE, (time.time() - start_time)))
+
+            print(
                 "===== Testing =====\n"
                 "Epoch {} \t Total cost = {:.2f}\n"
                 "RMSE = {:.5f} \t Elapsed time : {} sec\n".format(

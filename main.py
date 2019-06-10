@@ -41,7 +41,6 @@ np.random.seed(args.random_seed)
 # Detail about dataset
 data_name = 'ml-20m'
 num_users = 138493
-num_users = 1384
 
 num_items = 26744
 num_total_ratings = 20000263
