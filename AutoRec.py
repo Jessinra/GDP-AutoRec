@@ -63,7 +63,8 @@ class AutoRec():
         self.grad_clip = args.grad_clip
 
         self.logger = Logger()
-        self.session_log_path = "log/Autorec/ml-20m/{}/".format(self.timestamp)
+        self.session_log_path = "log/{}/".format(self.timestamp)
+        self.logger.create_session_folder(self.session_log_path)
         self.logger.set_default_filename(self.session_log_path + "log.txt")
         self.saver = tf.train.Saver()
 
@@ -82,7 +83,7 @@ class AutoRec():
 
             # Save the variables to disk.
             save_path = self.saver.save(
-                self.sess, self.session_log_path + "models/epoch{}".format(epoch_itr))
+                self.sess, self.session_log_path + "models/epoch_{}".format(epoch_itr))
             self.logger.log(
                 "===== Model saved in path: {} =====\n".format(save_path))
             print(
