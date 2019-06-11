@@ -78,7 +78,7 @@ class AutoRec():
             self.train_model(epoch_itr)
             self.test_model(epoch_itr)
 
-            filename = "preprocessed/ml-20m.{}".format(str(timestamp))
+            filename = "preprocessed/ml-20m.{}".format(str(self.timestamp))
 
             # Save the variables to disk.
             save_path = self.saver.save(
