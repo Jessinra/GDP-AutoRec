@@ -180,6 +180,8 @@ class AutoRec():
 
         for i in range(self.num_batch):
 
+            print("test batch {}".format(i))
+
             # Batching idx
             batch_start_idx = i * self.batch_size
             if(i == self.num_batch - 1):
