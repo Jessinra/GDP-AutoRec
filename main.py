@@ -1,8 +1,5 @@
 from data_preprocessor import *
 from AutoRec import AutoRec
-
-from ipywidgets import FloatProgress, IntProgress
-from IPython.display import display
 from datetime import datetime
 
 import tensorflow as tf
