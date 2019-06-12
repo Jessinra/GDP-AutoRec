@@ -1,2 +1,5 @@
 data/ml-20m
 preprocessed
+*.pyc
+.idea
+__pycache__
