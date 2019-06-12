@@ -66,7 +66,7 @@ class AutoRec():
         self.session_log_path = "log/{}/".format(self.timestamp)
         self.logger.create_session_folder(self.session_log_path)
         self.logger.set_default_filename(self.session_log_path + "log.txt")
-        self.saver = tf.train.Saver()
+        self.saver = tf.train.Saver(max_to_keep=None)
 
     def run(self):
 
@@ -78,8 +78,6 @@ class AutoRec():
 
             self.train_model(epoch_itr)
             self.test_model(epoch_itr)
-
-            filename = "preprocessed/ml-20m.{}".format(str(self.timestamp))
 
             # Save the variables to disk.
             save_path = self.saver.save(
@@ -179,8 +177,6 @@ class AutoRec():
         predict_R = csr_matrix((0, self.num_items))
 
         for i in range(self.num_batch):
-
-            print("test batch {}".format(i))
 
             # Batching idx
             batch_start_idx = i * self.batch_size
