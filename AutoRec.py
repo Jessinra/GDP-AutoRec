@@ -14,7 +14,7 @@ class AutoRec():
                  num_users, num_items,
                  R, mask_R, train_R, train_mask_R, test_R, test_mask_R, num_train_ratings, num_test_ratings,
                  user_train_set, item_train_set, user_test_set, item_test_set,
-                 result_path, logger=None):
+                 result_path):
 
         self.sess = sess
         self.args = args
@@ -27,7 +27,7 @@ class AutoRec():
         self.mask_R = mask_R
         self.train_R = train_R
         self.train_mask_R = train_mask_R
-        self.test_R = test_R
+        self.test_r = test_R
         self.test_mask_R = test_mask_R
         self.num_train_ratings = num_train_ratings
         self.num_test_ratings = num_test_ratings
@@ -75,7 +75,6 @@ class AutoRec():
         self.sess.run(init)
 
         for epoch_itr in range(self.train_epoch):
-
             self.train_model(epoch_itr)
             self.test_model(epoch_itr)
 
@@ -86,13 +85,12 @@ class AutoRec():
                 "===== Model saved in path: {} =====\n".format(save_path))
             print(
                 "===== Model saved in path: {} =====\n".format(save_path))
-            
 
         self.make_records()
 
     def prepare_model(self):
         self.input_R = tf.placeholder(dtype=tf.float32, shape=[
-                                      None, self.num_items], name="input_R")
+            None, self.num_items], name="input_R")
         self.input_mask_R = tf.placeholder(
             dtype=tf.float32, shape=[None, self.num_items], name="input_mask_R")
 
@@ -143,11 +141,10 @@ class AutoRec():
         batch_cost = 0
         for i in range(self.num_batch):
 
-            if i == self.num_batch - 1:
+            if i >= self.num_batch - 1:
                 batch_set_idx = random_perm_doc_idx[i * self.batch_size:]
-            elif i < self.num_batch - 1:
-                batch_set_idx = random_perm_doc_idx[i *
-                                                    self.batch_size: (i+1) * self.batch_size]
+            else:
+                batch_set_idx = random_perm_doc_idx[i * self.batch_size: (i + 1) * self.batch_size]
 
             _, cost = self.sess.run(
                 [self.optimizer, self.cost],
@@ -164,7 +161,7 @@ class AutoRec():
                 "Epoch {} \t Total cost = {:.2f}\n"
                 "Elapsed time : {} sec\n".format(
                     itr, batch_cost, (time.time() - start_time)))
-            
+
             print(
                 "===== Training =====\n"
                 "Epoch {} \t Total cost = {:.2f}\n"
@@ -173,53 +170,44 @@ class AutoRec():
 
     def test_model(self, itr):
         start_time = time.time()
+
         batch_cost = 0
-        predict_R = csr_matrix((0, self.num_items))
+        numerator = 0
 
         for i in range(self.num_batch):
 
             # Batching idx
             batch_start_idx = i * self.batch_size
-            if(i == self.num_batch - 1):
+            if i >= self.num_batch - 1:
                 batch_stop_idx = batch_start_idx + \
-                    (self.num_users - 1) % self.batch_size + 1
-            elif i < self.num_batch - 1:
+                                 (self.num_users - 1) % self.batch_size + 1
+            else:
                 batch_stop_idx = (i + 1) * self.batch_size
 
             cost, decoder = self.sess.run(
                 [self.cost, self.decoder],
-                feed_dict={self.input_R: self.test_R[batch_start_idx:batch_stop_idx].todense(),
+                feed_dict={self.input_R: self.test_r[batch_start_idx:batch_stop_idx].todense(),
                            self.input_mask_R: self.test_mask_R[batch_start_idx:batch_stop_idx].todense()})
 
-            batch_cost = batch_cost + cost
+            batch_cost += cost
 
-            # Make predicition if need to show
+            # Make prediction if need to show
             if (itr + 1) % self.display_step == 0:
-                batch_predict_R = csr_matrix(decoder.clip(min=0.2, max=1))
-                predict_R = vstack([predict_R, batch_predict_R])
+
+                batch_predict_r = csr_matrix(decoder.clip(min=0.2, max=1))
+
+                # Some statistic
+                predicted_rating_delta = batch_predict_r - self.test_r[batch_start_idx:batch_stop_idx]
+                pre_numerator = self.test_mask_R[batch_start_idx:batch_stop_idx].multiply(predicted_rating_delta)
+                numerator += np.sum(pre_numerator.data ** 2)
 
         self.test_cost_list.append(batch_cost)
 
+        # Make prediction if need to show
         if (itr + 1) % self.display_step == 0:
 
-            # Most likely gonna get skip through (every user and every item mostlikly show up in train)
-            unseen_user_test_list = list(
-                self.user_test_set - self.user_train_set)
-            unseen_item_test_list = list(
-                self.item_test_set - self.item_train_set)
-            for user in unseen_user_test_list:
-                for item in unseen_item_test_list:
-                    if self.test_mask_R[user, item] == 1:  # exist in test set
-                        predict_R[user, item] = 0.5
-
-            # Some statistic
-            n_test = self.num_batch * self.batch_size  # handle if not all data used
-            pre_numerator = self.test_mask_R[:n_test].multiply(
-                predict_R - self.test_R[:n_test])
-            numerator = np.sum(pre_numerator.data ** 2)
             denominator = self.num_test_ratings
             RMSE = np.sqrt(numerator / float(denominator))
-
             self.test_rmse_list.append(RMSE)
 
             self.logger.log(

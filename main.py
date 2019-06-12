@@ -6,7 +6,6 @@ import tensorflow as tf
 import time
 import argparse
 import numpy as np
-import pandas as pd
 import pickle
 
 current_time = time.time()
@@ -31,7 +30,7 @@ parser.add_argument('--display_step', type=int, default=5)
 args = parser.parse_args()
 print("\n ===> Args parsed\n")
 
-# Random seedings
+# Random seeding
 tf.set_random_seed(args.random_seed)
 np.random.seed(args.random_seed)
 
@@ -45,22 +44,22 @@ train_ratio = 0.9
 
 path = "data/{}/".format(data_name)
 result_path = 'results/{}/{}_{}_{}_{}/'.format(data_name,
-                                                str(args.random_seed),
-                                                str(args.optimizer_method),
-                                                str(args.base_lr),
-                                                str(current_time))
+                                               str(args.random_seed),
+                                               str(args.optimizer_method),
+                                               str(args.base_lr),
+                                               str(current_time))
 
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 print("\n ===> Config set\n")
 
-# Preprocessing data
+# Pre-processing data
 try:
     filename = "preprocessed/ml-20m.1559115930.037085"
-    R, mask_R, train_R, train_mask_R, test_R, test_mask_R,\
-        n_train_R, n_test_R,\
-        train_users_idx, train_items_idx,\
-        test_users_idx, test_items_idx = pickle.load(open(filename, 'rb'))
+    R, mask_R, train_R, train_mask_R, test_R, test_mask_R, \
+    n_train_R, n_test_R, \
+    train_users_idx, train_items_idx, \
+    test_users_idx, test_items_idx = pickle.load(open(filename, 'rb'))
 
     print("\n ===> Preprocess data success\n")
 
@@ -68,32 +67,32 @@ except:
 
     print("\n ===> Preprocessing data\n")
 
-    R, mask_R, train_R, train_mask_R, test_R, test_mask_R,\
-        n_train_R, n_test_R,\
-        train_users_idx, train_items_idx,\
-        test_users_idx, test_items_idx = read_rating(path, train_ratio)
+    R, mask_R, train_R, train_mask_R, test_R, test_mask_R, \
+    n_train_R, n_test_R, \
+    train_users_idx, train_items_idx, \
+    test_users_idx, test_items_idx = read_rating(path, train_ratio)
 
     now = datetime.now()
     timestamp = datetime.timestamp(now)
     filename = "preprocessed/ml-20m.{}".format(str(timestamp))
 
     preprocessed_data = (R, mask_R, train_R, train_mask_R, test_R, test_mask_R,
-                            n_train_R, n_test_R,
-                            train_users_idx, train_items_idx,
-                            test_users_idx, test_items_idx)
-
-    print("\n ===> Preprocess data success\n")
+                         n_train_R, n_test_R,
+                         train_users_idx, train_items_idx,
+                         test_users_idx, test_items_idx)
 
     pickle.dump(preprocessed_data, open(filename, 'wb'))
+    print("\n ===> Preprocess data success\n")
+
 
 with tf.Session(config=config) as sess:
     AutoRec = AutoRec(sess, args,
-                        num_users, num_items,
-                        R, mask_R, train_R, train_mask_R, test_R, test_mask_R,
-                        n_train_R, n_test_R,
-                        train_users_idx, train_items_idx,
-                        test_users_idx, test_items_idx,
-                        result_path)
+                      num_users, num_items,
+                      R, mask_R, train_R, train_mask_R, test_R, test_mask_R,
+                      n_train_R, n_test_R,
+                      train_users_idx, train_items_idx,
+                      test_users_idx, test_items_idx,
+                      result_path)
 
-    print("\n ===> Running model...\n")                    
+    print("\n ===> Running model...\n")
     AutoRec.run()
