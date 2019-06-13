@@ -5,20 +5,17 @@ import os
 import math
 from datetime import datetime
 from logger import Logger
-
-from scipy.sparse import csr_matrix, vstack
-
+from scipy.sparse import csr_matrix
+from tqdm import tqdm
 
 class AutoRec():
     def __init__(self, sess, args,
                  num_users, num_items,
                  R, mask_R, train_R, train_mask_R, test_R, test_mask_R, num_train_ratings, num_test_ratings,
-                 user_train_set, item_train_set, user_test_set, item_test_set,
-                 result_path):
+                 user_train_set, item_train_set, user_test_set, item_test_set):
 
         self.sess = sess
         self.args = args
-        self.timestamp = str(datetime.timestamp(datetime.now()))
 
         self.num_users = num_users
         self.num_items = num_items
@@ -59,9 +56,9 @@ class AutoRec():
         self.test_cost_list = []
         self.test_rmse_list = []
 
-        self.result_path = result_path
         self.grad_clip = args.grad_clip
 
+        self.timestamp = str(datetime.timestamp(datetime.now()))
         self.logger = Logger()
         self.session_log_path = "log/{}/".format(self.timestamp)
         self.logger.create_session_folder(self.session_log_path)
@@ -70,7 +67,10 @@ class AutoRec():
 
     def run(self):
 
+        # Log parameters
+        self.logger.log(str(self.args))
         self.prepare_model()
+        
         init = tf.global_variables_initializer()
         self.sess.run(init)
 
@@ -81,10 +81,6 @@ class AutoRec():
             # Save the variables to disk.
             save_path = self.saver.save(
                 self.sess, self.session_log_path + "models/epoch_{}".format(epoch_itr))
-            self.logger.log(
-                "===== Model saved in path: {} =====\n".format(save_path))
-            print(
-                "===== Model saved in path: {} =====\n".format(save_path))
 
         self.make_records()
 
@@ -157,9 +153,7 @@ class AutoRec():
 
         if (itr + 1) % self.display_step == 0:
             self.logger.log(
-                "===== Training =====\n"
-                "Epoch {} \t Total cost = {:.2f}\n"
-                "Elapsed time : {} sec\n".format(
+                "Training Epoch {}\tTotal cost = {:.2f}\tElapsed time : {} sec\n".format(
                     itr, batch_cost, (time.time() - start_time)))
 
             print(
@@ -211,9 +205,7 @@ class AutoRec():
             self.test_rmse_list.append(RMSE)
 
             self.logger.log(
-                "===== Testing =====\n"
-                "Epoch {} \t Total cost = {:.2f}\n"
-                "RMSE = {:.5f} \t Elapsed time : {} sec\n".format(
+                "Testing Epoch {}\tTotal cost = {:.2f}\tRMSE = {:.5f}\tElapsed time : {} sec\n".format(
                     itr, batch_cost, RMSE, (time.time() - start_time)))
 
             print(
@@ -223,12 +215,10 @@ class AutoRec():
                     itr, batch_cost, RMSE, (time.time() - start_time)))
 
     def make_records(self):
-        if not os.path.exists(self.result_path):
-            os.makedirs(self.result_path)
 
-        basic_info = self.result_path + "basic_info.txt"
-        train_record = self.result_path + "train_record.txt"
-        test_record = self.result_path + "test_record.txt"
+        basic_info = self.session_log_path + "basic_info.txt"
+        train_record = self.session_log_path + "train_record.txt"
+        test_record = self.session_log_path + "test_record.txt"
 
         with open(train_record, 'w') as f:
             f.write(str("cost:"))

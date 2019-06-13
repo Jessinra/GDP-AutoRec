@@ -12,7 +12,7 @@ class Logger:
         except OSError:  
             print ("Creation of the directory %s failed" % path)
         else:  
-            print ("\n ===> Successfully created the directory %s \n" % path)
+            print ("     ===> Successfully created the directory %s \n" % path)
 
     def log(self, text):
         with open(self.default_filename, 'a') as f:
