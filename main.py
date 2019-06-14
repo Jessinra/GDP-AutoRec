@@ -39,7 +39,6 @@ path = "data/intersect-20m"
 data_name = 'intersect-20m'
 num_users = 138493
 num_items = 15085
-num_total_ratings = 20000263
 train_ratio = 0.9
 
 config = tf.ConfigProto()

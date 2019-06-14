@@ -135,7 +135,7 @@ class AutoRec():
         random_perm_doc_idx = np.random.permutation(self.num_users)
 
         batch_cost = 0
-        for i in range(self.num_batch):
+        for i in tqdm(range(self.num_batch)):
 
             if i >= self.num_batch - 1:
                 batch_set_idx = random_perm_doc_idx[i * self.batch_size:]
@@ -153,9 +153,9 @@ class AutoRec():
 
         if (itr + 1) % self.display_step == 0:
             self.logger.log(
-                "Training Epoch {}\tTotal cost = {:.2f}\tElapsed time : {} sec\n".format(
+                "Training Epoch {}\tTotal cost = {:.2f}\tElapsed time : {} sec".format(
                     itr, batch_cost, (time.time() - start_time)))
-
+            
             print(
                 "===== Training =====\n"
                 "Epoch {} \t Total cost = {:.2f}\n"
@@ -167,8 +167,8 @@ class AutoRec():
 
         batch_cost = 0
         numerator = 0
-
-        for i in range(self.num_batch):
+        
+        for i in tqdm(range(self.num_batch)):
 
             # Batching idx
             batch_start_idx = i * self.batch_size
@@ -182,7 +182,7 @@ class AutoRec():
                 [self.cost, self.decoder],
                 feed_dict={self.input_R: self.test_r[batch_start_idx:batch_stop_idx].todense(),
                            self.input_mask_R: self.test_mask_R[batch_start_idx:batch_stop_idx].todense()})
-
+            
             batch_cost += cost
 
             # Make prediction if need to show
@@ -205,7 +205,7 @@ class AutoRec():
             self.test_rmse_list.append(RMSE)
 
             self.logger.log(
-                "Testing Epoch {}\tTotal cost = {:.2f}\tRMSE = {:.5f}\tElapsed time : {} sec\n".format(
+                "Testing Epoch {}\tTotal cost = {:.2f}\tRMSE = {:.5f}\tElapsed time : {} sec".format(
                     itr, batch_cost, RMSE, (time.time() - start_time)))
 
             print(
