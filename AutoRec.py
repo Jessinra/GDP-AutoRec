@@ -79,7 +79,7 @@ class AutoRec():
             self.test_model(epoch_itr)
 
             # Save the variables to disk.
-            if epoch_iter % self.save_step == 0:
+            if epoch_itr % self.save_step == 0:
                 self.saver.save(self.sess, self.session_log_path + "models/epoch_{}".format(epoch_itr))
 
         self.make_records()
