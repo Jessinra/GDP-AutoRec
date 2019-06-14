@@ -44,6 +44,7 @@ class AutoRec():
         self.optimizer_method = args.optimizer_method
         self.display_step = args.display_step
         self.random_seed = args.random_seed
+        self.save_step = args.save_step
 
         self.global_step = tf.Variable(0, trainable=False)
         self.decay_epoch_step = args.decay_epoch_step
@@ -63,7 +64,6 @@ class AutoRec():
         self.session_log_path = "log/{}/".format(self.timestamp)
         self.logger.create_session_folder(self.session_log_path)
         self.logger.set_default_filename(self.session_log_path + "log.txt")
-        self.saver = tf.train.Saver(max_to_keep=None)
 
     def run(self):
 
@@ -79,8 +79,8 @@ class AutoRec():
             self.test_model(epoch_itr)
 
             # Save the variables to disk.
-            save_path = self.saver.save(
-                self.sess, self.session_log_path + "models/epoch_{}".format(epoch_itr))
+            if epoch_iter % self.save_step == 0:
+                self.saver.save(self.sess, self.session_log_path + "models/epoch_{}".format(epoch_itr))
 
         self.make_records()
 
@@ -130,6 +130,8 @@ class AutoRec():
             self.optimizer = optimizer.minimize(
                 self.cost, global_step=self.global_step)
 
+        self.saver = tf.train.Saver(max_to_keep=None)
+            
     def train_model(self, itr):
         start_time = time.time()
         random_perm_doc_idx = np.random.permutation(self.num_users)

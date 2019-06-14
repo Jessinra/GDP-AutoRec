@@ -26,6 +26,7 @@ parser.add_argument('--decay_epoch_step', type=int, default=50,
 
 parser.add_argument('--random_seed', type=int, default=1000)
 parser.add_argument('--display_step', type=int, default=1)
+parser.add_argument('--save_step', type=int, default=5)
 
 args = parser.parse_args()
 print("     ===> Args parsed\n")
