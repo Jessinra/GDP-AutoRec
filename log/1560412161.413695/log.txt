@@ -1,0 +1,240 @@
+===== Training =====
+Epoch 0 	 Total cost = 891406.66
+Elapsed time : 36.91225337982178 sec
+
+===== Testing =====
+Epoch 0 	 Total cost = 181400.15
+RMSE = 0.21394 	 Elapsed time : 149.30996251106262 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_0 =====
+
+===== Training =====
+Epoch 1 	 Total cost = 576612.31
+Elapsed time : 37.22925519943237 sec
+
+===== Testing =====
+Epoch 1 	 Total cost = 149821.70
+RMSE = 0.21529 	 Elapsed time : 146.22565245628357 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_1 =====
+
+===== Training =====
+Epoch 2 	 Total cost = 552810.31
+Elapsed time : 37.922717571258545 sec
+
+===== Testing =====
+Epoch 2 	 Total cost = 141398.28
+RMSE = 0.21431 	 Elapsed time : 143.07824969291687 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_2 =====
+
+===== Training =====
+Epoch 3 	 Total cost = 541703.45
+Elapsed time : 40.29782962799072 sec
+
+===== Testing =====
+Epoch 3 	 Total cost = 134974.30
+RMSE = 0.21210 	 Elapsed time : 149.59288120269775 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_3 =====
+
+===== Training =====
+Epoch 4 	 Total cost = 533377.32
+Elapsed time : 34.4200484752655 sec
+
+===== Testing =====
+Epoch 4 	 Total cost = 128012.62
+RMSE = 0.20872 	 Elapsed time : 149.4726803302765 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_4 =====
+
+===== Training =====
+Epoch 5 	 Total cost = 523275.37
+Elapsed time : 36.38424015045166 sec
+
+===== Testing =====
+Epoch 5 	 Total cost = 121897.94
+RMSE = 0.20648 	 Elapsed time : 144.25602054595947 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_5 =====
+
+===== Training =====
+Epoch 6 	 Total cost = 517412.00
+Elapsed time : 35.949432611465454 sec
+
+===== Testing =====
+Epoch 6 	 Total cost = 123878.89
+RMSE = 0.20546 	 Elapsed time : 141.1649887561798 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_6 =====
+
+===== Training =====
+Epoch 7 	 Total cost = 511446.71
+Elapsed time : 36.437464237213135 sec
+
+===== Testing =====
+Epoch 7 	 Total cost = 119417.96
+RMSE = 0.20437 	 Elapsed time : 140.8214828968048 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_7 =====
+
+===== Training =====
+Epoch 8 	 Total cost = 507773.53
+Elapsed time : 41.13496279716492 sec
+
+===== Testing =====
+Epoch 8 	 Total cost = 113810.99
+RMSE = 0.20156 	 Elapsed time : 140.71174454689026 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_8 =====
+
+===== Training =====
+Epoch 9 	 Total cost = 502259.10
+Elapsed time : 33.968979358673096 sec
+
+===== Testing =====
+Epoch 9 	 Total cost = 112840.43
+RMSE = 0.20252 	 Elapsed time : 136.36660814285278 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_9 =====
+
+===== Training =====
+Epoch 10 	 Total cost = 497976.76
+Elapsed time : 35.76551270484924 sec
+
+===== Testing =====
+Epoch 10 	 Total cost = 112380.15
+RMSE = 0.20021 	 Elapsed time : 140.7843518257141 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_10 =====
+
+===== Training =====
+Epoch 11 	 Total cost = 494284.39
+Elapsed time : 41.0531804561615 sec
+
+===== Testing =====
+Epoch 11 	 Total cost = 109016.46
+RMSE = 0.19889 	 Elapsed time : 137.03691601753235 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_11 =====
+
+===== Training =====
+Epoch 12 	 Total cost = 491302.35
+Elapsed time : 36.022685050964355 sec
+
+===== Testing =====
+Epoch 12 	 Total cost = 112031.23
+RMSE = 0.19737 	 Elapsed time : 118.83881759643555 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_12 =====
+
+===== Training =====
+Epoch 13 	 Total cost = 486072.56
+Elapsed time : 36.18746852874756 sec
+
+===== Testing =====
+Epoch 13 	 Total cost = 104583.12
+RMSE = 0.19789 	 Elapsed time : 142.8463990688324 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_13 =====
+
+===== Training =====
+Epoch 14 	 Total cost = 483537.15
+Elapsed time : 35.720210313797 sec
+
+===== Testing =====
+Epoch 14 	 Total cost = 101422.30
+RMSE = 0.19717 	 Elapsed time : 134.52450251579285 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_14 =====
+
+===== Training =====
+Epoch 15 	 Total cost = 480721.34
+Elapsed time : 35.64262676239014 sec
+
+===== Testing =====
+Epoch 15 	 Total cost = 105995.07
+RMSE = 0.19723 	 Elapsed time : 137.0825710296631 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_15 =====
+
+===== Training =====
+Epoch 16 	 Total cost = 478162.64
+Elapsed time : 35.72175884246826 sec
+
+===== Testing =====
+Epoch 16 	 Total cost = 101151.14
+RMSE = 0.19664 	 Elapsed time : 145.07062697410583 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_16 =====
+
+===== Training =====
+Epoch 17 	 Total cost = 475303.97
+Elapsed time : 35.98330092430115 sec
+
+===== Testing =====
+Epoch 17 	 Total cost = 100450.70
+RMSE = 0.19611 	 Elapsed time : 137.29946208000183 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_17 =====
+
+===== Training =====
+Epoch 18 	 Total cost = 473552.09
+Elapsed time : 35.868361949920654 sec
+
+===== Testing =====
+Epoch 18 	 Total cost = 98144.27
+RMSE = 0.19493 	 Elapsed time : 138.83258724212646 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_18 =====
+
+===== Training =====
+Epoch 19 	 Total cost = 472364.14
+Elapsed time : 33.74132251739502 sec
+
+===== Testing =====
+Epoch 19 	 Total cost = 97007.00
+RMSE = 0.19601 	 Elapsed time : 140.42660546302795 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_19 =====
+
+===== Training =====
+Epoch 20 	 Total cost = 470275.98
+Elapsed time : 35.382726430892944 sec
+
+===== Testing =====
+Epoch 20 	 Total cost = 95929.13
+RMSE = 0.19622 	 Elapsed time : 136.24841952323914 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_20 =====
+
+===== Training =====
+Epoch 21 	 Total cost = 468843.16
+Elapsed time : 35.398905515670776 sec
+
+===== Testing =====
+Epoch 21 	 Total cost = 95500.24
+RMSE = 0.19520 	 Elapsed time : 119.31225204467773 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_21 =====
+
+===== Training =====
+Epoch 22 	 Total cost = 467315.36
+Elapsed time : 35.7130560874939 sec
+
+===== Testing =====
+Epoch 22 	 Total cost = 95650.75
+RMSE = 0.19590 	 Elapsed time : 124.88897180557251 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_22 =====
+
+===== Training =====
+Epoch 23 	 Total cost = 466181.27
+Elapsed time : 35.83364772796631 sec
+
+===== Testing =====
+Epoch 23 	 Total cost = 94153.16
+RMSE = 0.19407 	 Elapsed time : 135.1224639415741 sec
+
+===== Model saved in path: log/1560412161.413695/models/epoch_23 =====
+
