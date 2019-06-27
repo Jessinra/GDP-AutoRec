@@ -190,7 +190,7 @@ class AutoRec():
             # Make prediction if need to show
             if (itr + 1) % self.display_step == 0:
 
-                batch_predict_r = csr_matrix(decoder.clip(min=0.2, max=1))
+                batch_predict_r = csr_matrix(decoder.clip(min=1, max=5))
 
                 # Some statistic
                 predicted_rating_delta = batch_predict_r - self.test_r[batch_start_idx:batch_stop_idx]

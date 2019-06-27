@@ -1,6 +1,11 @@
 data/ml-20m
+data/intersect-20m
 preprocessed
 *.pyc
 .idea
 __pycache__
 *.ipynb_checkpoints
+*.meta
+*.data*
+*.index
+log/*/models
