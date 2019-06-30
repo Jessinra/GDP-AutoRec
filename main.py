@@ -15,6 +15,7 @@ parser.add_argument('--hidden_neuron', type=int, default=100)
 parser.add_argument('--lambda_value', type=float, default=1)
 
 parser.add_argument('--train_epoch', type=int, default=100)
+parser.add_argument('--train_ratio', type=float, default=0.9)
 parser.add_argument('--batch_size', type=int, default=500)
 
 parser.add_argument('--optimizer_method',
@@ -38,15 +39,13 @@ np.random.seed(args.random_seed)
 # Detail about dataset
 path = "data/intersect-20m"
 data_name = 'intersect-20m'
-num_users = 124643
-num_items = 15440
-train_ratio = 0.9
 
+# Allow tensorflow to grow
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
 print("     ===> Config set\n")
 
-# Pre-processing data
+# Try to load Pre-processed data
 try:
     filename = "{}/preprocessed_autorec_dataset".format(path)
     R, mask_R, train_R, train_mask_R, eval_R, eval_mask_R, \
@@ -56,24 +55,52 @@ try:
 
     print("     ===> Preprocess data success\n")
 
+# Preprocess again
 except:
 
     print("     ===> Preprocessing data\n")
 
-    filename = "{}/preprocessed_autorec_dataset".format(path)
     R, mask_R, train_R, train_mask_R, eval_R, eval_mask_R, \
     n_train_R, n_eval_R, \
     train_users_idx, train_items_idx, \
-    eval_users_idx, eval_items_idx = read_rating(path, train_ratio)
+    eval_users_idx, eval_items_idx = read_rating(path, args.train_ratio)
 
-    preprocessed_data = (R, mask_R, train_R, train_mask_R, eval_R, eval_mask_R,
-                         n_train_R, n_eval_R,
-                         train_users_idx, train_items_idx,
-                         eval_users_idx, eval_items_idx)
-    pickle.dump(preprocessed_data, open(filename, 'wb'))
+    # Theres issue with counting n_train, supposed to be number of nonzero relation - n_eval relation
+    n_train_R = len(R.nonzero()[0]) - n_eval_R
+
+    # Split preprocessed data by user (use 90% user for training, 10% user for testing)
+    separator = int(R.shape[0] * args.train_ratio)
+
+    test_R = R[separator:]
+    test_mask_R = mask_R[separator:]
+    test_train_R = train_R[separator:]
+    test_train_mask_R = train_mask_R[separator:]
+    test_eval_R = eval_R[separator:]
+    test_eval_mask_R = eval_mask_R[separator:]
+
+    R = R[:separator]
+    mask_R = mask_R[:separator]
+    train_R = train_R[:separator]
+    train_mask_R = train_mask_R[:separator]
+    eval_R = eval_R[:separator]
+    eval_mask_R = eval_mask_R[:separator]
+
+    # Set the number of eval and test
+    n_test_eval_R = len(test_eval_R.nonzero()[0]) # non zero
+    n_test_train_R = len(test_R.nonzero()[0]) - n_test_eval_R # non zero from R - non zero eval R
+
+    # Save to file
+    filename = "{}/preprocessed_autorec_dataset".format(path)
+    pickle.dump((R, mask_R, train_R, train_mask_R, eval_R, eval_mask_R, n_train_R, n_eval_R, train_users_idx, train_items_idx, eval_users_idx, eval_items_idx), open(filename, 'wb'))
+
+    filename = "{}/preprocessed_autorec_dataset_test".format(path)
+    pickle.dump((test_R, test_mask_R, test_train_R, test_train_mask_R, test_eval_R, test_eval_mask_R, n_test_train_R, n_test_eval_R, train_users_idx, train_items_idx, eval_users_idx, eval_items_idx), open(filename, 'wb'))
 
     print("      ===> Preprocess data success\n")
 
+
+num_users = R.shape[0]
+num_items = R.shape[1]
 
 with tf.Session(config=config) as sess:
     AutoRec = AutoRec(sess, args,

@@ -1,5 +1,7 @@
 data/ml-20m
-data/intersect-20m
+data/intersect-20m/*
+!data/intersect-20m/README.md
+
 preprocessed
 *.pyc
 .idea
