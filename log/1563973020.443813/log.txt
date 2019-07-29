@@ -1,0 +1,201 @@
+Namespace(base_lr=0.0005, batch_size=500, decay_epoch_step=25, display_step=1, grad_clip=False, hidden_neuron=100, lambda_value=1, optimizer_method='Adam', random_seed=1000, save_step=5, train_epoch=100, train_ratio=0.9)
+Training Epoch 0	Total cost = 27235534.44	Elapsed time : 67.65482783317566 sec
+Testing Epoch 0	Total cost = 2157862.10	RMSE = 1.16212	Elapsed time : 184.1552655696869 sec
+Training Epoch 1	Total cost = 10649716.21	Elapsed time : 68.11480975151062 sec
+Testing Epoch 1	Total cost = 2004159.82	RMSE = 1.11383	Elapsed time : 189.19422841072083 sec
+Training Epoch 2	Total cost = 10550131.75	Elapsed time : 68.42667698860168 sec
+Testing Epoch 2	Total cost = 1916270.68	RMSE = 1.08745	Elapsed time : 192.9183464050293 sec
+Training Epoch 3	Total cost = 10510026.82	Elapsed time : 69.96506595611572 sec
+Testing Epoch 3	Total cost = 1848881.48	RMSE = 1.06743	Elapsed time : 185.12302255630493 sec
+Training Epoch 4	Total cost = 10490681.53	Elapsed time : 72.42653203010559 sec
+Testing Epoch 4	Total cost = 1812924.11	RMSE = 1.05822	Elapsed time : 185.2404544353485 sec
+Training Epoch 5	Total cost = 10478425.97	Elapsed time : 71.43931436538696 sec
+Testing Epoch 5	Total cost = 1775462.59	RMSE = 1.04823	Elapsed time : 195.85462379455566 sec
+Training Epoch 6	Total cost = 10469125.10	Elapsed time : 67.30797576904297 sec
+Testing Epoch 6	Total cost = 1751133.76	RMSE = 1.04192	Elapsed time : 192.49972867965698 sec
+Training Epoch 7	Total cost = 10462549.06	Elapsed time : 71.09036135673523 sec
+Testing Epoch 7	Total cost = 1725008.45	RMSE = 1.03442	Elapsed time : 185.7959315776825 sec
+Training Epoch 8	Total cost = 10457814.89	Elapsed time : 72.04989647865295 sec
+Testing Epoch 8	Total cost = 1720053.01	RMSE = 1.03486	Elapsed time : 199.0639488697052 sec
+Training Epoch 9	Total cost = 10454643.80	Elapsed time : 71.76694416999817 sec
+Testing Epoch 9	Total cost = 1699909.97	RMSE = 1.02848	Elapsed time : 186.55411028862 sec
+Training Epoch 10	Total cost = 10451857.89	Elapsed time : 68.03930187225342 sec
+Testing Epoch 10	Total cost = 1683240.28	RMSE = 1.02412	Elapsed time : 183.14827132225037 sec
+Training Epoch 11	Total cost = 10449158.02	Elapsed time : 72.38410663604736 sec
+Testing Epoch 11	Total cost = 1672012.64	RMSE = 1.02135	Elapsed time : 186.4980673789978 sec
+Training Epoch 12	Total cost = 10446135.43	Elapsed time : 67.72491073608398 sec
+Testing Epoch 12	Total cost = 1666351.86	RMSE = 1.02067	Elapsed time : 164.77317094802856 sec
+Training Epoch 13	Total cost = 10444290.48	Elapsed time : 74.57463574409485 sec
+Testing Epoch 13	Total cost = 1652932.50	RMSE = 1.01753	Elapsed time : 185.96149730682373 sec
+Training Epoch 14	Total cost = 10441617.79	Elapsed time : 69.18228936195374 sec
+Testing Epoch 14	Total cost = 1635216.49	RMSE = 1.01210	Elapsed time : 186.79726266860962 sec
+Training Epoch 15	Total cost = 10439412.25	Elapsed time : 64.90396475791931 sec
+Testing Epoch 15	Total cost = 1613867.41	RMSE = 1.00424	Elapsed time : 180.8801097869873 sec
+Training Epoch 16	Total cost = 10438430.46	Elapsed time : 67.84309434890747 sec
+Testing Epoch 16	Total cost = 1617225.53	RMSE = 1.00683	Elapsed time : 186.19845461845398 sec
+Training Epoch 17	Total cost = 10434777.66	Elapsed time : 66.68823671340942 sec
+Testing Epoch 17	Total cost = 1610906.51	RMSE = 1.00568	Elapsed time : 179.7656922340393 sec
+Training Epoch 18	Total cost = 10434029.42	Elapsed time : 40.51995134353638 sec
+Testing Epoch 18	Total cost = 1586213.08	RMSE = 0.99750	Elapsed time : 183.6743996143341 sec
+Training Epoch 19	Total cost = 10432752.55	Elapsed time : 68.12627673149109 sec
+Testing Epoch 19	Total cost = 1581422.57	RMSE = 0.99661	Elapsed time : 178.66615915298462 sec
+Training Epoch 20	Total cost = 10430628.67	Elapsed time : 44.974985122680664 sec
+Testing Epoch 20	Total cost = 1565930.06	RMSE = 0.99160	Elapsed time : 179.8356306552887 sec
+Training Epoch 21	Total cost = 10428496.75	Elapsed time : 67.07816052436829 sec
+Testing Epoch 21	Total cost = 1562202.08	RMSE = 0.99122	Elapsed time : 176.42547178268433 sec
+Training Epoch 22	Total cost = 10426386.40	Elapsed time : 66.62128829956055 sec
+Testing Epoch 22	Total cost = 1553152.59	RMSE = 0.98845	Elapsed time : 183.52319049835205 sec
+Training Epoch 23	Total cost = 10426628.66	Elapsed time : 67.35854411125183 sec
+Testing Epoch 23	Total cost = 1524582.82	RMSE = 0.97783	Elapsed time : 176.71393609046936 sec
+Training Epoch 24	Total cost = 10421445.56	Elapsed time : 65.29895853996277 sec
+Testing Epoch 24	Total cost = 1516601.56	RMSE = 0.97590	Elapsed time : 173.80094027519226 sec
+Training Epoch 25	Total cost = 10359618.69	Elapsed time : 66.00296092033386 sec
+Testing Epoch 25	Total cost = 1499400.95	RMSE = 0.96968	Elapsed time : 176.07884430885315 sec
+Training Epoch 26	Total cost = 10277667.14	Elapsed time : 66.16094470024109 sec
+Testing Epoch 26	Total cost = 1480277.36	RMSE = 0.96170	Elapsed time : 174.04859161376953 sec
+Training Epoch 27	Total cost = 10197140.23	Elapsed time : 65.70172095298767 sec
+Testing Epoch 27	Total cost = 1460795.29	RMSE = 0.95453	Elapsed time : 172.74055075645447 sec
+Training Epoch 28	Total cost = 10102194.91	Elapsed time : 64.81322383880615 sec
+Testing Epoch 28	Total cost = 1451792.94	RMSE = 0.95005	Elapsed time : 173.29999494552612 sec
+Training Epoch 29	Total cost = 10025424.96	Elapsed time : 64.90396285057068 sec
+Testing Epoch 29	Total cost = 1442265.04	RMSE = 0.94570	Elapsed time : 175.2214252948761 sec
+Training Epoch 30	Total cost = 9964901.12	Elapsed time : 64.790780544281 sec
+Testing Epoch 30	Total cost = 1430982.95	RMSE = 0.94020	Elapsed time : 174.79507088661194 sec
+Training Epoch 31	Total cost = 9906143.58	Elapsed time : 64.03013586997986 sec
+Testing Epoch 31	Total cost = 1428380.15	RMSE = 0.93812	Elapsed time : 173.04466199874878 sec
+Training Epoch 32	Total cost = 9850914.84	Elapsed time : 64.57472586631775 sec
+Testing Epoch 32	Total cost = 1425305.75	RMSE = 0.93525	Elapsed time : 170.64346933364868 sec
+Training Epoch 33	Total cost = 9794768.25	Elapsed time : 64.76639366149902 sec
+Testing Epoch 33	Total cost = 1421956.79	RMSE = 0.93290	Elapsed time : 173.7567844390869 sec
+Training Epoch 34	Total cost = 9744681.91	Elapsed time : 65.09462547302246 sec
+Testing Epoch 34	Total cost = 1415933.28	RMSE = 0.92850	Elapsed time : 177.23117065429688 sec
+Training Epoch 35	Total cost = 9703292.64	Elapsed time : 65.68252396583557 sec
+Testing Epoch 35	Total cost = 1405642.55	RMSE = 0.92317	Elapsed time : 181.64531588554382 sec
+Training Epoch 36	Total cost = 9662798.44	Elapsed time : 65.65303015708923 sec
+Testing Epoch 36	Total cost = 1405807.26	RMSE = 0.92089	Elapsed time : 173.17358994483948 sec
+Training Epoch 37	Total cost = 9624938.01	Elapsed time : 65.3177011013031 sec
+Testing Epoch 37	Total cost = 1404331.59	RMSE = 0.91750	Elapsed time : 169.2551953792572 sec
+Training Epoch 38	Total cost = 9579160.28	Elapsed time : 61.91438102722168 sec
+Testing Epoch 38	Total cost = 1411282.45	RMSE = 0.91868	Elapsed time : 179.25172019004822 sec
+Training Epoch 39	Total cost = 9538855.82	Elapsed time : 67.8068151473999 sec
+Testing Epoch 39	Total cost = 1405696.54	RMSE = 0.91480	Elapsed time : 177.04845809936523 sec
+Training Epoch 40	Total cost = 9498740.44	Elapsed time : 76.08573031425476 sec
+Testing Epoch 40	Total cost = 1408047.81	RMSE = 0.91337	Elapsed time : 178.88322019577026 sec
+Training Epoch 41	Total cost = 9459477.30	Elapsed time : 64.27518439292908 sec
+Testing Epoch 41	Total cost = 1407714.98	RMSE = 0.90998	Elapsed time : 173.67884016036987 sec
+Training Epoch 42	Total cost = 9420368.38	Elapsed time : 63.24079394340515 sec
+Testing Epoch 42	Total cost = 1409599.39	RMSE = 0.90929	Elapsed time : 166.53549885749817 sec
+Training Epoch 43	Total cost = 9381161.37	Elapsed time : 64.15547323226929 sec
+Testing Epoch 43	Total cost = 1408227.31	RMSE = 0.90617	Elapsed time : 164.52166199684143 sec
+Training Epoch 44	Total cost = 9340565.81	Elapsed time : 63.504764556884766 sec
+Testing Epoch 44	Total cost = 1413498.93	RMSE = 0.90648	Elapsed time : 168.21156120300293 sec
+Training Epoch 45	Total cost = 9304851.93	Elapsed time : 65.55963158607483 sec
+Testing Epoch 45	Total cost = 1414649.96	RMSE = 0.90384	Elapsed time : 175.08570790290833 sec
+Training Epoch 46	Total cost = 9266854.37	Elapsed time : 64.08252286911011 sec
+Testing Epoch 46	Total cost = 1413185.20	RMSE = 0.90049	Elapsed time : 161.7911901473999 sec
+Training Epoch 47	Total cost = 9225885.74	Elapsed time : 61.6757390499115 sec
+Testing Epoch 47	Total cost = 1419851.73	RMSE = 0.90094	Elapsed time : 156.37047696113586 sec
+Training Epoch 48	Total cost = 9186338.07	Elapsed time : 62.739874601364136 sec
+Testing Epoch 48	Total cost = 1421352.11	RMSE = 0.89868	Elapsed time : 155.40363311767578 sec
+Training Epoch 49	Total cost = 9147906.08	Elapsed time : 61.73201322555542 sec
+Testing Epoch 49	Total cost = 1430538.08	RMSE = 0.89976	Elapsed time : 155.03892302513123 sec
+Training Epoch 50	Total cost = 9105751.61	Elapsed time : 60.59999203681946 sec
+Testing Epoch 50	Total cost = 1429963.32	RMSE = 0.89716	Elapsed time : 158.8562400341034 sec
+Training Epoch 51	Total cost = 9070492.67	Elapsed time : 60.589568853378296 sec
+Testing Epoch 51	Total cost = 1434133.30	RMSE = 0.89630	Elapsed time : 154.3407437801361 sec
+Training Epoch 52	Total cost = 9035194.89	Elapsed time : 60.30328154563904 sec
+Testing Epoch 52	Total cost = 1440420.42	RMSE = 0.89609	Elapsed time : 156.60463690757751 sec
+Training Epoch 53	Total cost = 8997630.90	Elapsed time : 37.32825231552124 sec
+Testing Epoch 53	Total cost = 1443252.66	RMSE = 0.89392	Elapsed time : 155.8217806816101 sec
+Training Epoch 54	Total cost = 8962444.28	Elapsed time : 60.8507559299469 sec
+Testing Epoch 54	Total cost = 1447269.87	RMSE = 0.89314	Elapsed time : 153.44079661369324 sec
+Training Epoch 55	Total cost = 8928215.54	Elapsed time : 23.369818449020386 sec
+Testing Epoch 55	Total cost = 1451403.15	RMSE = 0.89177	Elapsed time : 153.27288460731506 sec
+Training Epoch 56	Total cost = 8893588.11	Elapsed time : 60.256001472473145 sec
+Testing Epoch 56	Total cost = 1457333.64	RMSE = 0.89194	Elapsed time : 155.61458921432495 sec
+Training Epoch 57	Total cost = 8858955.02	Elapsed time : 60.28332233428955 sec
+Testing Epoch 57	Total cost = 1465900.09	RMSE = 0.89331	Elapsed time : 154.4276795387268 sec
+Training Epoch 58	Total cost = 8826504.92	Elapsed time : 60.21001100540161 sec
+Testing Epoch 58	Total cost = 1462231.64	RMSE = 0.88915	Elapsed time : 151.31727576255798 sec
+Training Epoch 59	Total cost = 8794840.53	Elapsed time : 60.23593544960022 sec
+Testing Epoch 59	Total cost = 1468992.91	RMSE = 0.88865	Elapsed time : 153.36333870887756 sec
+Training Epoch 60	Total cost = 8764430.44	Elapsed time : 60.31392502784729 sec
+Testing Epoch 60	Total cost = 1473725.57	RMSE = 0.88880	Elapsed time : 154.56369590759277 sec
+Training Epoch 61	Total cost = 8735225.19	Elapsed time : 60.22310256958008 sec
+Testing Epoch 61	Total cost = 1476832.27	RMSE = 0.88800	Elapsed time : 145.33994483947754 sec
+Training Epoch 62	Total cost = 8707062.59	Elapsed time : 60.1989049911499 sec
+Testing Epoch 62	Total cost = 1480697.04	RMSE = 0.88655	Elapsed time : 152.8618528842926 sec
+Training Epoch 63	Total cost = 8679340.23	Elapsed time : 60.208120584487915 sec
+Testing Epoch 63	Total cost = 1483578.67	RMSE = 0.88660	Elapsed time : 154.11840176582336 sec
+Training Epoch 64	Total cost = 8654236.89	Elapsed time : 60.22529888153076 sec
+Testing Epoch 64	Total cost = 1494086.31	RMSE = 0.88786	Elapsed time : 154.02128052711487 sec
+Training Epoch 65	Total cost = 8630843.04	Elapsed time : 60.10798668861389 sec
+Testing Epoch 65	Total cost = 1491940.54	RMSE = 0.88521	Elapsed time : 150.93078541755676 sec
+Training Epoch 66	Total cost = 8608347.66	Elapsed time : 60.366963386535645 sec
+Testing Epoch 66	Total cost = 1496629.73	RMSE = 0.88475	Elapsed time : 150.53490543365479 sec
+Training Epoch 67	Total cost = 8585529.32	Elapsed time : 60.34579038619995 sec
+Testing Epoch 67	Total cost = 1505524.26	RMSE = 0.88621	Elapsed time : 151.24395656585693 sec
+Training Epoch 68	Total cost = 8563728.49	Elapsed time : 22.853711128234863 sec
+Testing Epoch 68	Total cost = 1504387.46	RMSE = 0.88361	Elapsed time : 154.7804090976715 sec
+Training Epoch 69	Total cost = 8543390.03	Elapsed time : 60.36968970298767 sec
+Testing Epoch 69	Total cost = 1508285.13	RMSE = 0.88316	Elapsed time : 152.09775710105896 sec
+Training Epoch 70	Total cost = 8523526.77	Elapsed time : 60.381526947021484 sec
+Testing Epoch 70	Total cost = 1515705.03	RMSE = 0.88404	Elapsed time : 155.46623754501343 sec
+Training Epoch 71	Total cost = 8504016.25	Elapsed time : 60.27699089050293 sec
+Testing Epoch 71	Total cost = 1514671.17	RMSE = 0.88130	Elapsed time : 152.17369961738586 sec
+Training Epoch 72	Total cost = 8483727.75	Elapsed time : 60.42911386489868 sec
+Testing Epoch 72	Total cost = 1516908.62	RMSE = 0.88027	Elapsed time : 152.1440885066986 sec
+Training Epoch 73	Total cost = 8466109.96	Elapsed time : 60.40298628807068 sec
+Testing Epoch 73	Total cost = 1524716.20	RMSE = 0.88203	Elapsed time : 154.6609661579132 sec
+Training Epoch 74	Total cost = 8448182.45	Elapsed time : 60.45330786705017 sec
+Testing Epoch 74	Total cost = 1527031.85	RMSE = 0.88031	Elapsed time : 153.67149329185486 sec
+Training Epoch 75	Total cost = 8426066.52	Elapsed time : 60.35967993736267 sec
+Testing Epoch 75	Total cost = 1528119.09	RMSE = 0.87900	Elapsed time : 153.04556822776794 sec
+Training Epoch 76	Total cost = 8410097.66	Elapsed time : 60.29493832588196 sec
+Testing Epoch 76	Total cost = 1531661.00	RMSE = 0.87922	Elapsed time : 153.50027298927307 sec
+Training Epoch 77	Total cost = 8392498.31	Elapsed time : 60.40503787994385 sec
+Testing Epoch 77	Total cost = 1535375.63	RMSE = 0.87878	Elapsed time : 153.81006932258606 sec
+Training Epoch 78	Total cost = 8376703.72	Elapsed time : 60.333290815353394 sec
+Testing Epoch 78	Total cost = 1542729.94	RMSE = 0.88099	Elapsed time : 154.79641962051392 sec
+Training Epoch 79	Total cost = 8362246.56	Elapsed time : 60.4150185585022 sec
+Testing Epoch 79	Total cost = 1543103.25	RMSE = 0.87915	Elapsed time : 153.82414293289185 sec
+Training Epoch 80	Total cost = 8346694.05	Elapsed time : 60.328628063201904 sec
+Testing Epoch 80	Total cost = 1543759.39	RMSE = 0.87812	Elapsed time : 154.43696546554565 sec
+Training Epoch 81	Total cost = 8336513.54	Elapsed time : 60.414597034454346 sec
+Testing Epoch 81	Total cost = 1547974.59	RMSE = 0.87839	Elapsed time : 150.14585733413696 sec
+Training Epoch 82	Total cost = 8322225.89	Elapsed time : 60.09153938293457 sec
+Testing Epoch 82	Total cost = 1552437.88	RMSE = 0.87858	Elapsed time : 149.77186512947083 sec
+Training Epoch 83	Total cost = 8308755.15	Elapsed time : 60.52566909790039 sec
+Testing Epoch 83	Total cost = 1553838.06	RMSE = 0.87722	Elapsed time : 154.17772769927979 sec
+Training Epoch 84	Total cost = 8296555.05	Elapsed time : 60.31532907485962 sec
+Testing Epoch 84	Total cost = 1554398.35	RMSE = 0.87638	Elapsed time : 149.82914638519287 sec
+Training Epoch 85	Total cost = 8283209.53	Elapsed time : 60.34002876281738 sec
+Testing Epoch 85	Total cost = 1557001.60	RMSE = 0.87598	Elapsed time : 153.1425337791443 sec
+Training Epoch 86	Total cost = 8271856.53	Elapsed time : 59.87864136695862 sec
+Testing Epoch 86	Total cost = 1558149.04	RMSE = 0.87559	Elapsed time : 153.06339955329895 sec
+Training Epoch 87	Total cost = 8259707.33	Elapsed time : 59.94279146194458 sec
+Testing Epoch 87	Total cost = 1564358.83	RMSE = 0.87659	Elapsed time : 154.27135252952576 sec
+Training Epoch 88	Total cost = 8248738.17	Elapsed time : 60.25990700721741 sec
+Testing Epoch 88	Total cost = 1562887.90	RMSE = 0.87443	Elapsed time : 155.13756036758423 sec
+Training Epoch 89	Total cost = 8236515.58	Elapsed time : 60.300374269485474 sec
+Testing Epoch 89	Total cost = 1566869.02	RMSE = 0.87489	Elapsed time : 153.34260869026184 sec
+Training Epoch 90	Total cost = 8226087.86	Elapsed time : 59.93435740470886 sec
+Testing Epoch 90	Total cost = 1570908.55	RMSE = 0.87530	Elapsed time : 153.95125722885132 sec
+Training Epoch 91	Total cost = 8215503.75	Elapsed time : 59.55258107185364 sec
+Testing Epoch 91	Total cost = 1570650.65	RMSE = 0.87451	Elapsed time : 154.8234052658081 sec
+Training Epoch 92	Total cost = 8206003.91	Elapsed time : 59.61460733413696 sec
+Testing Epoch 92	Total cost = 1570591.94	RMSE = 0.87324	Elapsed time : 154.96284532546997 sec
+Training Epoch 93	Total cost = 8197274.13	Elapsed time : 59.93152737617493 sec
+Testing Epoch 93	Total cost = 1573928.88	RMSE = 0.87311	Elapsed time : 152.53406810760498 sec
+Training Epoch 94	Total cost = 8185459.53	Elapsed time : 59.832736015319824 sec
+Testing Epoch 94	Total cost = 1576907.67	RMSE = 0.87292	Elapsed time : 151.1333818435669 sec
+Training Epoch 95	Total cost = 8176012.42	Elapsed time : 59.641841173172 sec
+Testing Epoch 95	Total cost = 1580205.46	RMSE = 0.87330	Elapsed time : 154.9905605316162 sec
+Training Epoch 96	Total cost = 8166553.44	Elapsed time : 59.202353715896606 sec
+Testing Epoch 96	Total cost = 1579056.46	RMSE = 0.87145	Elapsed time : 150.30344891548157 sec
+Training Epoch 97	Total cost = 8157464.19	Elapsed time : 59.039944887161255 sec
+Testing Epoch 97	Total cost = 1587361.14	RMSE = 0.87319	Elapsed time : 151.9037230014801 sec
+Training Epoch 98	Total cost = 8143423.85	Elapsed time : 65.58288598060608 sec
+Testing Epoch 98	Total cost = 1586546.70	RMSE = 0.87219	Elapsed time : 153.35167455673218 sec
+Training Epoch 99	Total cost = 8133725.76	Elapsed time : 59.11928701400757 sec
+Testing Epoch 99	Total cost = 1589457.62	RMSE = 0.87189	Elapsed time : 150.90200638771057 sec

@@ -8,11 +8,11 @@ Recommender system using [AutoRec](http://users.cecs.anu.edu.au/~akmenon/papers/
 *Given a list of previously interacted items and list of un-interacted items, find the most probable item from the un-interacted ones*
 
 # Contents
-- data : contains dataset to use in training
-    - **intersect-20m** : custom ml-20m dataset where only movies shows up in Ripple-Net's knowledge graph used.    
-    - ml-1m : original movielens 1m dataset
-- **log** : contains training result stored in single folder named after training timestamp.
-- **test** : contains jupyter notebook used in testing the trained models
+- `/data` : contains dataset to use in training
+    - **`/intersect-20m`** : custom ml-20m dataset where only movies shows up in Ripple-Net's knowledge graph used.    
+    - `/ml-1m` : original movielens 1m dataset
+- **`/log`** : contains training result stored in single folder named after training timestamp.
+- **`/test`** : contains jupyter notebook used in testing the trained models
 <!-- ---------------------------------------- -->
 - `AutoRec.py` : source code for Autorec
 - `data_preprocessor.py` : preprocess data before fed into for Autorec
@@ -24,13 +24,6 @@ Recommender system using [AutoRec](http://users.cecs.anu.edu.au/~akmenon/papers/
 ### Note
     *italic* means this folder is ommited from git, but necessary if you need to run experiments
     **bold** means this folder has it's own README, check it for detailed information :)
-
-# How to run
-1. Prepare the dataset and the preprocessed version (check section below this)
-2. Run the training script
-    ~~~
-    python3 main.py
-    ~~~
 
 # Preparing 
 ## Installing dependencies 
@@ -55,6 +48,13 @@ Desired output :
 - `data/intersect-20m/preprocessed_autorec_dataset` (used in train)
 - `data/intersect-20m/preprocessed_autorec_dataset_test` (used for testing only)
 
+# How to run
+1. Prepare the dataset and the preprocessed version (check section below this)
+2. Run the training script
+    ~~~
+    python3 main.py
+    ~~~
+
 # Training
 ## How to change hyper parameter
 There are several ways to do this :
@@ -70,18 +70,38 @@ There are several ways to do this :
 5. Run the notebook
 
 # Final result
-| Metric             | Value       |
-|--------------------|-------------|
-| Average prec@10    | +- 0.08     |
-| Diversity@10 n=10  | 0.11 - 0.20 |
-| Evaluated on       | 13.5k users |
+| Evaluated on  |  Prec@10   |
+|---------------|------------|
+|    500 user   |   0.05300  |
+|   1000 user   |   0.05130  |
+|   5000 user   |   0.05162  |
+|  13850 user   |   0.05147  |
+|  25000 user   |   0.05124  |
+
+| Evaluated on  | Distinct@10   | Unique items |
+|---------------|---------------|--------------|
+|     10 user   |    0.21000    |    21        |
+|     30 user   |    0.06667    |    20        |
+|    100 user   |    0.02000    |    20        |
+|   1000 user   |    0.00310    |    31        |
+|   3000 user   |    0.00077    |    23        |
 
 # Other findings
 - Models tends to suggest generic items that are rated high by a large number of users.
 - Autorec model is much faster to train & test (than LightFM & RippleNet), and also much more robust since the model is not user centred.
 
+# Pros
+- Fast training time and predicting time
+- Not user centered (model doesn't remember user)
+
+# Cons
+- Require input to be in the form of pivot table (row = user, col = items)
+- Require big memory size -> solved by using batch processing
+- The model need to be re-trained for every new item addition.
+- Doesn't handle cold start, every new user will be given the same recommendation.
+
 # Experiment notes
-- Don't normalize the rating (1 to 5 => 0 to 1): Model to learn to ranks items and give same top suggestion for every user.
+- Normalizing the rating from (1 to 5 => 0 to 1) will lead to weird behaviour of model where it learn to rank items and give same top suggestion for every user.
 
 # Author
 - Jessin Donnyson - jessinra@gmail.com
@@ -89,4 +109,4 @@ There are several ways to do this :
 # Contributors
 - Benedict Tobias Henokh Wahyudi - tobi8800@gmail.com
 - Michael Julio - michael.julio@gdplabs.id
-- Fallon Candra - fallon.candra@gdplabs.id
+- Fallon Candra - fallon.candra@gdplabs.id 
