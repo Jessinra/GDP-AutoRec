@@ -1,44 +1,49 @@
-import tensorflow as tf
-import time
-import numpy as np
-import os
 import math
+import os
+import time
 from datetime import datetime
-from logger import Logger
+
+import numpy as np
+import tensorflow as tf
 from scipy.sparse import csr_matrix
 from tqdm import tqdm
 
+from logger import Logger
+
+
 class AutoRec():
-    def __init__(self, sess, args,
-                 num_users, num_items,
-                 R, mask_R, train_R, train_mask_R, test_R, test_mask_R, num_train_ratings, num_test_ratings,
-                 user_train_set, item_train_set, user_test_set, item_test_set):
+    def __init__(self, sess, args, dataset_container):
 
         self.sess = sess
         self.args = args
 
-        self.num_users = num_users
-        self.num_items = num_items
+        self.num_users = dataset_container.rating.shape[0]
+        self.num_items = dataset_container.rating.shape[1]
 
-        self.R = R
-        self.mask_R = mask_R
-        self.train_R = train_R
-        self.train_mask_R = train_mask_R
-        self.test_r = test_R
-        self.test_mask_R = test_mask_R
-        self.num_train_ratings = num_train_ratings
-        self.num_test_ratings = num_test_ratings
+        # ===== Unpack data from container ========
+        self.R = dataset_container.rating
+        self.mask_R = dataset_container.mask_rating
 
-        self.user_train_set = user_train_set
-        self.item_train_set = item_train_set
-        self.user_test_set = user_test_set
-        self.item_test_set = item_test_set
+        self.train_R = dataset_container.train_rating
+        self.train_mask_R = dataset_container.train_mask_rating
 
+        self.test_r = dataset_container.test_rating
+        self.test_mask_R = dataset_container.test_mask_rating
+
+        self.num_train_ratings = dataset_container.n_train_rating
+        self.num_test_ratings = dataset_container.n_test_rating
+
+        self.user_train_set = dataset_container.train_users_idx
+        self.item_train_set = dataset_container.train_items_idx
+
+        self.user_test_set = dataset_container.test_users_idx
+        self.item_test_set = dataset_container.test_items_idx
+
+        # ===== Model attribute =====
         self.hidden_neuron = args.hidden_neuron
         self.train_epoch = args.train_epoch
         self.batch_size = args.batch_size
-        self.num_batch = int(
-            math.ceil(self.num_users / float(self.batch_size)))
+        self.num_batch = int(math.ceil(self.num_users / float(self.batch_size)))
 
         self.base_lr = args.base_lr
         self.optimizer_method = args.optimizer_method
@@ -59,6 +64,7 @@ class AutoRec():
 
         self.grad_clip = args.grad_clip
 
+        # ====== Logger =====
         self.timestamp = str(datetime.timestamp(datetime.now()))
         self.logger = Logger()
         self.session_log_path = "log/{}/".format(self.timestamp)
@@ -70,7 +76,7 @@ class AutoRec():
         # Log parameters
         self.logger.log(str(self.args))
         self.prepare_model()
-        
+
         init = tf.global_variables_initializer()
         self.sess.run(init)
 
@@ -94,10 +100,8 @@ class AutoRec():
                                                                       mean=0, stddev=0.03), dtype=tf.float32)
         W = tf.get_variable(name="W", initializer=tf.truncated_normal(shape=[self.hidden_neuron, self.num_items],
                                                                       mean=0, stddev=0.03), dtype=tf.float32)
-        mu = tf.get_variable(name="mu", initializer=tf.zeros(
-            shape=self.hidden_neuron), dtype=tf.float32)
-        b = tf.get_variable(name="b", initializer=tf.zeros(
-            shape=self.num_items), dtype=tf.float32)
+        mu = tf.get_variable(name="mu", initializer=tf.zeros(shape=self.hidden_neuron), dtype=tf.float32)
+        b = tf.get_variable(name="b", initializer=tf.zeros(shape=self.num_items), dtype=tf.float32)
 
         pre_Encoder = tf.matmul(self.input_R, V) + mu
         self.Encoder = tf.nn.sigmoid(pre_Encoder)
@@ -105,8 +109,7 @@ class AutoRec():
         pre_Decoder = tf.matmul(self.Encoder, W) + b
         self.decoder = tf.identity(pre_Decoder)
 
-        pre_rec_cost = tf.multiply(
-            (self.input_R - self.decoder), self.input_mask_R)
+        pre_rec_cost = tf.multiply((self.input_R - self.decoder), self.input_mask_R)
         rec_cost = tf.square(self.l2_norm(pre_rec_cost))
         pre_reg_cost = tf.square(self.l2_norm(W)) + tf.square(self.l2_norm(V))
         reg_cost = self.lambda_value * 0.5 * pre_reg_cost
@@ -122,16 +125,13 @@ class AutoRec():
 
         if self.grad_clip:
             gvs = optimizer.compute_gradients(self.cost)
-            capped_gvs = [(tf.clip_by_value(grad, -5., 5.), var)
-                          for grad, var in gvs]
-            self.optimizer = optimizer.apply_gradients(
-                capped_gvs, global_step=self.global_step)
+            capped_gvs = [(tf.clip_by_value(grad, -5., 5.), var) for grad, var in gvs]
+            self.optimizer = optimizer.apply_gradients(capped_gvs, global_step=self.global_step)
         else:
-            self.optimizer = optimizer.minimize(
-                self.cost, global_step=self.global_step)
+            self.optimizer = optimizer.minimize(self.cost, global_step=self.global_step)
 
         self.saver = tf.train.Saver(max_to_keep=None)
-            
+
     def train_model(self, itr):
         start_time = time.time()
         random_perm_doc_idx = np.random.permutation(self.num_users)
@@ -144,8 +144,7 @@ class AutoRec():
             else:
                 batch_set_idx = random_perm_doc_idx[i * self.batch_size: (i + 1) * self.batch_size]
 
-            _, cost = self.sess.run(
-                [self.optimizer, self.cost],
+            _, cost = self.sess.run([self.optimizer, self.cost],
                 feed_dict={self.input_R: self.train_R[batch_set_idx, :].todense(),
                            self.input_mask_R: self.train_mask_R[batch_set_idx, :].todense()})
 
@@ -157,7 +156,7 @@ class AutoRec():
             self.logger.log(
                 "Training Epoch {}\tTotal cost = {:.2f}\tElapsed time : {} sec".format(
                     itr, batch_cost, (time.time() - start_time)))
-            
+
             print(
                 "===== Training =====\n"
                 "Epoch {} \t Total cost = {:.2f}\n"
@@ -169,14 +168,14 @@ class AutoRec():
 
         batch_cost = 0
         numerator = 0
-        
+
         for i in tqdm(range(self.num_batch)):
 
             # Batching idx
             batch_start_idx = i * self.batch_size
             if i >= self.num_batch - 1:
                 batch_stop_idx = batch_start_idx + \
-                                 (self.num_users - 1) % self.batch_size + 1
+                    (self.num_users - 1) % self.batch_size + 1
             else:
                 batch_stop_idx = (i + 1) * self.batch_size
 
@@ -184,7 +183,7 @@ class AutoRec():
                 [self.cost, self.decoder],
                 feed_dict={self.input_R: self.test_r[batch_start_idx:batch_stop_idx].todense(),
                            self.input_mask_R: self.test_mask_R[batch_start_idx:batch_stop_idx].todense()})
-            
+
             batch_cost += cost
 
             # Make prediction if need to show

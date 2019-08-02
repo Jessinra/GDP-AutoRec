@@ -2,6 +2,9 @@ data/ml-20m
 data/intersect-20m/*
 !data/intersect-20m/README.md
 
+.vscode
+.ipynb_checkpoints
+
 preprocessed
 *.pyc
 .idea
