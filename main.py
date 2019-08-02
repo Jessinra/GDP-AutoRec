@@ -42,10 +42,11 @@ dataset_path = "data/intersect-20m"
 if __name__ == "__main__":
 
     # Try to load Pre-processed data
-    cached_dataset_train = "{}/preprocessed_autorec_dataset".format(dataset_path)
-    cached_dataset_test = "{}/preprocessed_autorec_dataset_test".format(dataset_path)
+    cached_dataset_train = "{}/preprocessed_dataset".format(dataset_path)
+    cached_dataset_test = "{}/preprocessed_dataset_test".format(dataset_path)
 
     if os.path.exists(cached_dataset_train):
+
         print("loaded from cache : {}".format(cached_dataset_train))
         train_dataset_container = pickle.load(open(cached_dataset_train, 'rb'))
 

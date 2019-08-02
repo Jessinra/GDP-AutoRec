@@ -21,15 +21,15 @@ class ProcessedDataContainer:
         self.test_items_idx = None
 
     def slice(self, start_idx=None, end_idx=None):
-        
-        self.rating = self.rating[start_idx, end_idx]
-        self.mask_rating = self.mask_rating[start_idx, end_idx]
 
-        self.train_rating = self.train_rating[start_idx, end_idx]
-        self.train_mask_rating = self.train_mask_rating[start_idx, end_idx]
+        self.rating = self.rating[start_idx:end_idx]
+        self.mask_rating = self.mask_rating[start_idx:end_idx]
 
-        self.test_rating = self.test_rating[start_idx, end_idx]
-        self.test_mask_rating = self.test_mask_rating[start_idx, end_idx]
+        self.train_rating = self.train_rating[start_idx:end_idx]
+        self.train_mask_rating = self.train_mask_rating[start_idx:end_idx]
+
+        self.test_rating = self.test_rating[start_idx:end_idx]
+        self.test_mask_rating = self.test_mask_rating[start_idx:end_idx]
 
         self._update_count()
 

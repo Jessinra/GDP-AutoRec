@@ -40,20 +40,18 @@ You can download the intersect-20m dataset [here](https://github.com/Jessinra/GD
 - `data/intersect-20m/ratings.csr` : csr matrix (row = user, col = items, value = ratings) created with intersect-20m ratings, this file can be created using this [jupyter notebook](https://github.com/Jessinra/GDP-KG-Dataset/blob/master/Preprocess.ipynb) (Preprocess.ipynb inside the dataset).
 
 ## How to prepare data
-There are several ways to preprocess data (both yield the same result):
-1. Simply provide `data/intersect-20m/ratings.csr` and run `main.py`, the script will preprocess it before training begin.
-2. Run `Preprocessor.ipynb`. (the preprocess step of `main.py` will be skipped).
 
+Simply provide `data/intersect-20m/ratings.csr` and run `main.py`, the script will preprocess it before training begin.
+s
 Desired output : 
-- `data/intersect-20m/preprocessed_autorec_dataset` (used in train)
-- `data/intersect-20m/preprocessed_autorec_dataset_test` (used for testing only)
+- `data/intersect-20m/preprocessed_dataset` (used in train)
+- `data/intersect-20m/preprocessed_dataset_test` (used for testing only)
 
 # How to run
-1. Prepare the dataset and the preprocessed version (check section below this)
-2. Run the training script
-    ~~~
-    python3 main.py
-    ~~~
+Simply run the `main.py`
+~~~
+python3 main.py
+~~~
 
 # Training
 ## How to change hyper parameter

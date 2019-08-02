@@ -1,8 +1,11 @@
+import pickle
+
 import numpy as np
 import pandas as pd
-import pickle
 from scipy import sparse
-from scipy.sparse import csr_matrix, lil_matrix, csr_matrix
+from scipy.sparse import csr_matrix, lil_matrix
+from tqdm import tqdm
+
 from data_container import ProcessedDataContainer
 
 
@@ -21,13 +24,13 @@ def get_rating_dataset_container(dataset_path, train_ratio):
 
     # Wrap things into single object
     container.rating = cached_csr_rating
-    container.mask_rating = mask_if_not_zero(cached_csr_rating)
+    container.mask_rating = _mask_if_not_zero(cached_csr_rating)
 
     container.train_rating = train_rating
-    container.train_mask_rating = mask_if_not_zero(train_rating)
+    container.train_mask_rating = _mask_if_not_zero(train_rating)
 
     container.test_rating = test_rating
-    container.test_mask_rating = mask_if_not_zero(test_rating)
+    container.test_mask_rating = _mask_if_not_zero(test_rating)
 
     container.n_train_rating = n_train_rating
     container.n_test_rating = n_test_rating
@@ -63,7 +66,7 @@ def _train_test_split(rating_dataset, train_ratio, random_state=55):
     train_users_idx = set(np.arange(rating_dataset.shape[0]))
     train_items_idx = set(np.arange(rating_dataset.shape[1]))
 
-    for idx in sampled_idx:
+    for idx in tqdm(sampled_idx):
 
         row = nonzero[0][idx]
         col = nonzero[1][idx]
@@ -81,7 +84,7 @@ def _train_test_split(rating_dataset, train_ratio, random_state=55):
         test_users_idx, test_items_idx
 
 
-def mask_if_not_zero(matrix):
+def _mask_if_not_zero(matrix):
     
     nonzero_idx = matrix.nonzero()
     keep = np.arange(len(nonzero_idx[0]))

@@ -5,11 +5,10 @@ from datetime import datetime
 
 import numpy as np
 import tensorflow as tf
-from scipy.sparse import csr_matrix
+from scipy.sparse import csr_matrix, lil_matrix, vstack
 from tqdm import tqdm
 
 from logger import Logger
-
 
 class AutoRec():
     def __init__(self, sess, args, dataset_container):
@@ -145,8 +144,8 @@ class AutoRec():
                 batch_set_idx = random_perm_doc_idx[i * self.batch_size: (i + 1) * self.batch_size]
 
             _, cost = self.sess.run([self.optimizer, self.cost],
-                feed_dict={self.input_R: self.train_R[batch_set_idx, :].todense(),
-                           self.input_mask_R: self.train_mask_R[batch_set_idx, :].todense()})
+                                    feed_dict={self.input_R: self.train_R[batch_set_idx, :].todense(),
+                                               self.input_mask_R: self.train_mask_R[batch_set_idx, :].todense()})
 
             batch_cost = batch_cost + cost
 
@@ -248,3 +247,34 @@ class AutoRec():
 
     def l2_norm(self, tensor):
         return tf.sqrt(tf.reduce_sum(tf.square(tensor)))
+
+    # ============  CUSTOM FOR EVALUATION  ======================
+
+    def custom_run(self):
+        self.prepare_model()
+
+    def predict(self, rating, mask_rating):
+
+        batch_cost = 0
+        predict_r = csr_matrix((0, rating.shape[1]))
+        num_batch = int(math.ceil(rating.shape[0] / float(self.batch_size)))
+
+        for i in (range(num_batch)):
+
+            # Batching idx
+            batch_start_idx = i * self.batch_size
+            if i >= self.num_batch - 1:
+                batch_stop_idx = batch_start_idx + (self.num_users - 1) % self.batch_size + 1
+            else:
+                batch_stop_idx = (i + 1) * self.batch_size
+
+            cost, decoder = self.sess.run(
+                [self.cost, self.decoder],
+                feed_dict={self.input_R: rating[batch_start_idx:batch_stop_idx].todense(),
+                           self.input_mask_R: mask_rating[batch_start_idx:batch_stop_idx].todense()})
+
+            batch_cost += cost
+            batch_predict_r = csr_matrix(decoder.clip(min=1, max=5))
+            predict_r = vstack([predict_r, batch_predict_r])
+
+        return predict_r, batch_cost
